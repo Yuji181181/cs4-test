@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-e)hflk%gq(ji&%%jc3fv)rpflg=jmj&(*%3)3q*dc%jwl=u32b
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']  # For Cloud Run
+CSRF_TRUSTED_ORIGINS = ['https://cs4-test-37440368160.asia-northeast1.run.app']
 
 
 # Application definition
@@ -85,11 +86,9 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:INIAD-CS4-0115@db.pejozaivdzzbmtmoeyvl.supabase.co:5432/postgres',
-        
         # Cloud Run / Supabase 用の必須設定
         conn_max_age=600,
-        ssl_require=True  
+        ssl_require=True
     )
 }
 
@@ -135,3 +134,10 @@ LOGOUT_REDIRECT_URL = 'login'
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Using a generic placeholder as requested. User will replace this.
+# Groq API Key
+import os
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY')

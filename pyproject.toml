@@ -9,6 +9,7 @@ dependencies = [
     "daphne>=4.2.1",
     "dj-database-url>=3.0.1",
     "django>=6.0",
+    "groq>=1.0.0",
     "psycopg2-binary>=2.9.11",
     "whitenoise>=6.11.0",
 ]
