@@ -104,7 +104,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @from_channels_db
     def save_message(self, user, message):
         from .models import Channel, Message
-        channel = Channel.objects.get(name=self.room_name)
+        # チャンネルがなければ作成する (安全策)
+        channel, created = Channel.objects.get_or_create(name=self.room_name)
         Message.objects.create(user=user, channel=channel, content=message)
 
     @from_channels_db
